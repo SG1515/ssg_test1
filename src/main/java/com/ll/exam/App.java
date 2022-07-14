@@ -22,6 +22,7 @@ public class App {
                     String content = sc.nextLine();
                     System.out.println("작가 : ");
                     String author = sc.nextLine();
+                    break;
                 case "종료":
                     break outer; // 종료
             }
