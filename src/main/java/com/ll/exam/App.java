@@ -53,6 +53,9 @@ public class App {
                 case "삭제":
                     remove(rq);
                     break;
+                case "수정":
+                    modify(rq);
+                    break;
                 case "종료":
                     break outer; // 종료
             }
@@ -61,9 +64,10 @@ public class App {
 
     }
 
-    private void remove(Rq rq) {
+    private void modify(Rq rq) { // 수정
         int id = rq.getIntParam("id", 0);
 
+        //삭제와 동일한 구문
         if (id == 0) {
             System.out.println("번호를 입력해주세요.");
             return;
@@ -71,6 +75,35 @@ public class App {
 
         WiseSaying wiseSaying = findById(id);
 
+        if (wiseSaying == null) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+            return;
+        }
+        //기존 명언 출력
+        System.out.printf("명언(기존) : %s\n", wiseSaying.content);
+        //새로운 명언 입력
+        System.out.println("명언 : ");
+        String content = sc.nextLine();
+        //기존 작가 출력
+        System.out.printf("작가(기존) : %s\n", wiseSaying.author);
+        //새로운 작가 입력
+       System.out.println("작가 : ");
+        String author = sc.nextLine();
+
+        wiseSaying.content = content; //입력된 명언 저장
+        wiseSaying.author = author; //입력된 작가 저장
+    }
+
+    private void remove(Rq rq) {  //삭제
+        int id = rq.getIntParam("id", 0);
+        //번호가 있는지 조회
+        if (id == 0) {
+            System.out.println("번호를 입력해주세요.");
+            return;
+        }
+
+        WiseSaying wiseSaying = findById(id);
+        //데이터가 있는지 조회
         if (wiseSaying == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
             return;
