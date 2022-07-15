@@ -6,22 +6,27 @@ import java.util.Scanner;
 
 public class App {
     private Scanner sc;
+    int wiseSayingsLastId;
+    List<WiseSaying> wiseSayings;
+
     public App(Scanner sc) {
-        this.sc =sc;
+        this.sc = sc;
+        wiseSayingsLastId = 0;
+        wiseSayings = new ArrayList<>();
     }
 
     public void run() {
         System.out.println("==명언 SSG==");
 
-        int wiseSayingsLastId = 0;
-        List<WiseSaying> wiseSayings = new ArrayList<>();
+
 
         outer:
         while(true) {
             System.out.println("명령) "); //명령 출력 후
             String cmd = sc.nextLine().trim(); //입력
+            Rq rq = new Rq(cmd);
 
-            switch ( cmd ) { // 입력된 값이 종료일 경우
+            switch ( rq.getPath() ) { // 입력된 값이 종료일 경우
                 case "등록":
                     int id = ++wiseSayingsLastId;
                     System.out.println("명언 : ");
@@ -45,6 +50,9 @@ public class App {
                     }
                     break;
 
+                case "삭제":
+                    remove(rq);
+                    break;
                 case "종료":
                     break outer; // 종료
             }
@@ -53,7 +61,36 @@ public class App {
 
     }
 
+    private void remove(Rq rq) {
+        int id = rq.getIntParam("id", 0);
 
+        if (id == 0) {
+            System.out.println("번호를 입력해주세요.");
+            return;
+        }
+
+        WiseSaying wiseSaying = findById(id);
+
+        if (wiseSaying == null) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+            return;
+        }
+
+        wiseSayings.remove(wiseSaying);
+
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
+
+    }
+
+    private WiseSaying findById(int id) {
+        for (WiseSaying wiseSaying : wiseSayings) {
+            if (wiseSaying.id == id) {
+                return wiseSaying;
+            }
+        }
+
+        return null;
+    }
 
 
 }

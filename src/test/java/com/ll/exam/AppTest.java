@@ -6,10 +6,31 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest {
+    @Test
+    public void 명언을_삭제_할_수_있다() {
+        String rs = AppTestRunner.run("""
+                등록
+                나의 죽음을 적들에게 알리지 말라
+                이순신
+                등록
+                나에게 불가능이란 없다.
+                나폴레옹
+                삭제?id=1
+                목록
+                삭제?id=1
+                종료
+                """); // 자동등록
+
+
+        assertTrue(rs.contains("1번 명언이 삭제되었습니다."));
+        assertTrue(rs.contains("2 / 나폴레옹 / 나에게 불가능이란 없다."));
+        assertFalse(rs.contains("1 / 이순신 / 나의 죽음을 적들에게 알리지 말라"));// 삭제했으니 1번 없음 assertFalse사용
+        assertTrue(rs.contains("1번 명언은 존재하지 않습니다."));
+    }
+
 
     @Test
     public void 등록_후_목록에서_확인() {
