@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AppTest {
 
     @Test
-    public void 명언을_수정_할_수_있다() {
+    public void 명언을_수정할_수_있다() {
         String rs = AppTestRunner.run("""
                 등록
                 나의 죽음을 적들에게 알리지 말라
@@ -25,13 +25,12 @@ public class AppTest {
                 이순신장군
                 목록
                 종료
-                """); // 자동등록
-
+                """);
 
         assertTrue(rs.contains("1 / 이순신 / 나의 죽음을 적들에게 알리지 말라"));
         assertTrue(rs.contains("1 / 이순신장군 / 나의 죽음을 적들에게 알리지 마라!"));
-
     }
+
     @Test
     public void 명언을_삭제_할_수_있다() {
         String rs = AppTestRunner.run("""
