@@ -19,4 +19,12 @@ public class WiseSaying {
                 }
                 """.stripIndent().formatted(id, content, author);
     }
+    @Override
+    public String toString() {
+        return "WiseSaying{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }
