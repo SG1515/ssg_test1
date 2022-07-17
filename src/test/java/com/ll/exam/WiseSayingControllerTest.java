@@ -1,6 +1,9 @@
 package com.ll.exam;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.io.ByteArrayOutputStream;
 
@@ -8,8 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //컨트롤러들을 작동시켜서 테스트 하는 것들
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WiseSayingControllerTest {
+    @BeforeAll
+    public void beforeAll() {
+        App.mode = "test";
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+        Util.file.deleteDir(App.getBaseDir());
+    }
 
     @Test
     public void 명언을_수정할_수_있다() {
