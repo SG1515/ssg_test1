@@ -14,9 +14,9 @@ public class WiseSayingController {
     }
 
     public void write(Rq rq) {
-        System.out.println("명언 : ");
+        System.out.printf("명언 : ");
         String content = sc.nextLine();
-        System.out.println("작가 : ");
+        System.out.printf("작가 : ");
         String author = sc.nextLine();
 
         WiseSaying wiseSaying = wiseSayingService.write(content, author);
@@ -26,8 +26,8 @@ public class WiseSayingController {
 
 
     public void list(Rq rq) {
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("----------------------");
+        System.out.printf("번호 / 작가 / 명언\n");
+        System.out.printf("----------------------\n");
 
         List<WiseSaying> wiseSayings = wiseSayingService.findAll();
 
@@ -44,7 +44,7 @@ public class WiseSayingController {
 
         //삭제와 동일한 구문
         if (id == 0) {
-            System.out.println("번호를 입력해주세요.");
+            System.out.printf("번호를 입력해주세요.\n");
             return;
         }
 
@@ -57,14 +57,14 @@ public class WiseSayingController {
         //기존 명언 출력
         System.out.printf("명언(기존) : %s\n", wiseSaying.content);
         //새로운 명언 입력
-        System.out.println("명언 : ");
+        System.out.printf("명언 : ");
         String content = sc.nextLine();
 
 
         //기존 작가 출력
         System.out.printf("작가(기존) : %s\n", wiseSaying.author);
         //새로운 작가 입력
-        System.out.println("작가 : ");
+        System.out.printf("작가 : ");
         String author = sc.nextLine();
 
         wiseSayingService.modify(id, content, author);
@@ -76,7 +76,7 @@ public class WiseSayingController {
         int id = rq.getIntParam("id", 0);
         //번호가 있는지 조회
         if (id == 0) {
-            System.out.println("번호를 입력해주세요.");
+            System.out.printf("번호를 입력해주세요.\n");
             return;
         }
 

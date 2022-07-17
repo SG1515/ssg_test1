@@ -3,24 +3,24 @@ package com.ll.exam;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WiseSayingReposiotory {
+public class WiseSayingRepository {
 
     private int wiseSayingsLastId;
     private List<WiseSaying> wiseSayings;
 
-    public WiseSayingReposiotory() {
+    public WiseSayingRepository() {
         wiseSayingsLastId = 0;
         wiseSayings = new ArrayList<>();
     }
+    //repository에는 write보다는 add라고 사용한다.
+    //비즈니스 로직을 가지면 안좋다.
 
-    public WiseSaying write(String content, String author) {
+    public WiseSaying add(String content, String author) {
         int id = ++wiseSayingsLastId;
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
 
         wiseSayings.add(wiseSaying);
-
-        System.out.printf("%d번 명언이 등록되었습니다.\n", id);
 
         return wiseSaying;
     }
