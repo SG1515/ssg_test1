@@ -94,6 +94,8 @@ public class WiseSayingController {
     }
 
 
+    public void build(Rq rq) {
+        wiseSayingService.dumpToJson();
 
-
+    }
 }
